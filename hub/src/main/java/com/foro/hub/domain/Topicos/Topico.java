@@ -7,9 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
-@Table(name = "topicos")
+@Table(name = "topico")
 @Entity(name = "Topico")
 @Getter
 @NoArgsConstructor
@@ -31,17 +32,17 @@ public class Topico {
         this.activo = true;
         this.tema = datos.tema();
         this.texto = datos.texto();
-        this.fecha = LocalDateTime.now().toString();
+        this.fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
     }
 
-    public void actualizarInformacoes(DatosActualizacionTopico datos) {
+    public void actualizarInformacion(DatosActualizacionTopico datos) {
         if (datos.tema() != null) {
             this.tema = datos.tema();
         }
-        if (datos.text() != null) {
-            this.texto = datos.text();
+        if (datos.texto() != null) {
+            this.texto = datos.texto();
         }
-            this.fecha = LocalDateTime.now().toString();
+            this.fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
 
     }
 

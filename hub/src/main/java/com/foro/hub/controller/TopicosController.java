@@ -36,7 +36,7 @@ public class TopicosController {
 
     @GetMapping
     @Operation(summary = "Obtiene el listado para los temas")
-    public ResponseEntity<Page<DatosListaTopico>> listar(@PageableDefault(size = 10, sort = {"nombre"}) Pageable paginacion) {
+    public ResponseEntity<Page<DatosListaTopico>> listar(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacion) {
         var page = repository.findAllByActivoTrue(paginacion).map(DatosListaTopico::new);
         return ResponseEntity.ok(page);
     }
@@ -45,10 +45,10 @@ public class TopicosController {
     @Transactional
     @Operation(summary = "Actualiza las informaciones para el paciente")
     public ResponseEntity actualizar(@RequestBody @Valid DatosActualizacionTopico datos) {
-        var paciente = repository.getReferenceById(datos.id());
-        paciente.actualizarInformacoes(datos);
+        var tema = repository.getReferenceById(datos.id());
+        tema.actualizarInformacion(datos);
 
-        return ResponseEntity.ok(new DatosDetallesTopico(paciente));
+        return ResponseEntity.ok(new DatosDetallesTopico(tema));
     }
 
     @DeleteMapping("/{id}")
@@ -64,8 +64,8 @@ public class TopicosController {
     @GetMapping("/{id}")
     @Operation(summary = "obtiene los detalles para el tema con el ID indicado")
     public ResponseEntity detallar(@PathVariable Long id) {
-        var paciente = repository.getReferenceById(id);
-        return ResponseEntity.ok(new DatosDetallesTopico(paciente));
+        var tema = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DatosDetallesTopico(tema));
     }
 
 

@@ -6,5 +6,5 @@ public record DatosActualizacionTopico(
         @NotNull
         Long id,
         String tema,
-        String text) {
+        String texto) {
 }

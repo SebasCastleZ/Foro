@@ -8,7 +8,6 @@ public record DatosRegistroTopico(
         @NotBlank
         String tema,
         @NotBlank
-        @Email
         String texto,
         @NotBlank
         String fecha) {
